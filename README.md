@@ -1,4 +1,4 @@
-# Proyecto 2
+# Proyecto 2 - Recuperación de Documentos de Texto
 ## Integrantes:
 <ul>
 <li>Jose Sanchez</li>
