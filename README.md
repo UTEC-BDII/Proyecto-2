@@ -5,3 +5,6 @@
 <li>Jorge Castillo</li>
 <li>Luis Carbajal</li>
 </ul> 
+
+## Informe
+Leer la sección de Wiki.
