@@ -1,8 +1,6 @@
 import json
-import sys
 from os import listdir
 from os.path import isfile, join
-import params
 
 def encodeText(tweet_text):    
     tweet_text = tweet_text.replace('\n',' ')  
@@ -50,21 +48,6 @@ def parse_file(file_in, file_out):
                 print(e, " :: ", line)
 
     ptrFile_out.write(json.dumps(cleanLines, ensure_ascii=False))
-    ptrFile_out.close()      
-
-if __name__ == '__main__':
-    path_in = params.folder_path 
-    path_out = params.clean_path
-
-    for f in listdir(path_in):
-        file_in = join(path_in, f)    
-        file_out = join(path_out, f)   
-        if isfile(file_in):
-            parse_file(file_in, file_out)
-
+    ptrFile_out.close()
 
     
-
-        
-                
-        

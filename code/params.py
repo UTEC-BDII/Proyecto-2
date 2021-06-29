@@ -43,5 +43,6 @@ tracklist = {
     'Tapia':['Renato Tapia','@renatotapiac'],
     'Trauco':['Miguel Trauco', '@mtrauco17'],
     'Ramos':['Christian Ramos', '@RamosGaragay'],
-    'Corzo':['Aldo Corzo', '@Alditocorzo']
+    'Corzo':['Aldo Corzo', '@Alditocorzo'],
+    'Test':['#FREE_EXO']
 }

@@ -2,12 +2,13 @@
 import tweepy
 from datetime import datetime
 import time
-import params
 
 #This is a basic listener that just prints received tweets to stdout.
 class TweetListener(tweepy.StreamListener):
-    def __init__(self, base_filename):
+    def __init__(self, base_filename, start_time, time_limit=60):
         self.__base_filename = base_filename
+        self.time = start_time
+        self.limit = time_limit
 
     def __open_file(self):
         now=datetime.now()
@@ -16,11 +17,15 @@ class TweetListener(tweepy.StreamListener):
         return ptrFile
 
     def on_data(self, data):
-        print(datetime.now().strftime("%Y-%m-%d %H:%M:%S") + " :: tweet read" )
-        ptrFile = self.__open_file()        
-        ptrFile.write(data + "\n")
-        ptrFile.close()
-        return True
+        if (time.time() - self.time) < self.limit:
+            print(datetime.now().strftime("%Y-%m-%d %H:%M:%S") + " :: tweet read" )
+            ptrFile = self.__open_file()        
+            ptrFile.write(data + "\n")
+            ptrFile.close()
+            return True
+        else: 
+            print("Time limit passed.")
+            return False
 
     def on_error(self, status):
         print("--- ERROR " + status + " ----")
@@ -28,22 +33,3 @@ class TweetListener(tweepy.StreamListener):
             print("--- Waiting 15 minutes ---")
             time.sleep(15*60) #waiting by 15 minutes
 
-
-if __name__ == '__main__':
-    listener = TweetListener(params.folder_path + "tweets")
-
-    #This handles Twitter authetification and the connection to Twitter Streaming API
-    auth = tweepy.OAuthHandler(params.consumer_key, params.consumer_secret)
-    auth.set_access_token(params.access_token, params.access_token_secret)
-    stream = tweepy.Stream(auth, listener)
-    
-    listaTrack = []
-    for k, v in params.tracklist.items(): 
-        listaTrack = listaTrack + v
-
-    while(True):
-        try:
-            stream.filter(track=listaTrack)
-        except:
-            print("---- CONNECTION ERROR ----")
-            pass
