@@ -9,6 +9,9 @@ consumer_secret = "G3pP3ZLJBcE7AHhiGAOsLPy06956oXUCbGstp0OIKM8EEH7312"
 folder_path = "raw/"
 #destination folder for clean tweets
 clean_path = "clean/"
+#name of file to store tweets
+tweetFilename = "tweets"
+tweetFilename = tweetFilename + ".json"
 
 # the list of tracking words 
 """
@@ -44,5 +47,5 @@ tracklist = {
     'Trauco':['Miguel Trauco', '@mtrauco17'],
     'Ramos':['Christian Ramos', '@RamosGaragay'],
     'Corzo':['Aldo Corzo', '@Alditocorzo'],
-    'Test':['#FREE_EXO']
+    'Test':['Combina', '#NoDejemosMorirElCine', '#IgnoranteDePorqueria']
 }

@@ -12,7 +12,7 @@ class TweetListener(tweepy.StreamListener):
 
     def __open_file(self):
         now=datetime.now()
-        filename = self.__base_filename + "_" + now.strftime("%Y-%m-%d")+".json"
+        filename = self.__base_filename
         ptrFile = open(filename, "a+")
         return ptrFile
 
