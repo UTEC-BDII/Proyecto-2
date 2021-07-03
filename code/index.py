@@ -12,7 +12,7 @@ with open("stoplist.txt", 'r', encoding='utf-8') as file:
     stoplist = [line.lower().strip() for line in file]
 stoplist += ['.', ',', '-', '«', '»', '(', ')', '"', '\'', ':', 
             ';', '!', '¡', '¿', '?', '`', '#', '@', '\'\'', '..',
-            '...', '....', '``']
+            '...', '....', '``', '’']
 
 # Remove stopwords
 def clean(list):
@@ -50,10 +50,20 @@ def readData():
 
     return tweets
 
+# Get TFIDF vector from a terms list
+def getTFIDF(list, index):
+    open = []
+    return open
+
+# Get norm of vector
+def getNorm(vector):
+    return 0
+
 # Inverted index class
 class InvertedIndex:
     filename = ""
     index = {}
+    norms = {}
 
     def __init__(self, filename):
         self.filename = filename
@@ -61,23 +71,31 @@ class InvertedIndex:
 
     def createIndex(self):
         tweets = readData()
-        tokenFreq = []
+        N = len(tweets)
         tokens = []
         for tweet in tweets:
             for token in tweets[tweet]:
                 tokens.append(token)
         
         tokensSet = set(tokens.copy())
+        tokensSet = sorted(tokensSet)
+
         for token in tokensSet:
-            tokenFreq.append([token, tokens.count(token)])
-
-        tokenFreq = sorted(tokenFreq)
-
-        for token in tokenFreq:
-            docIDs = []
+            tweetIDs = []
             for tweet in tweets:
-                if token[0] in tweets[tweet]:
-                    docIDs.append(tweet)
-            self.index[token[0]] = [token[1], docIDs]
-            
-        # self.write()
+                if token in tweets[tweet]:
+                    tf = tweets[tweet].count(token)
+                    tf = round(np.log10(tf)+1, 3)
+                    tweetIDs.append([tweet, tf])
+            idf = round(np.log10(N/len(tweetIDs)), 3)
+            self.index[token] = {}
+            self.index[token]["idf"] = idf
+            self.index[token]["pub"] = tweetIDs
+
+        self.getNorms(tweets)
+
+    def getNorms(self, tweets):
+        for tweet in tweets:
+            termList = tweets[tweet]
+            norm = getNorm(getTFIDF(termList, self.index))
+            self.norms[tweet] = norm
