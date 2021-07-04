@@ -154,8 +154,7 @@ class InvertedIndex:
         N = len(tweets)
         tokens = []
         for tweet in tweets:
-            for token in tweets[tweet]:
-                tokens.append(token)
+            tokens += tweets[tweet]
         
         tokensSet = set(tokens.copy())
         tokensSet = sorted(tokensSet)
