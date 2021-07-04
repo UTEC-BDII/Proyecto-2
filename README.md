@@ -13,17 +13,14 @@ Clonar el repositorio localmente:
 ```
 git clone https://github.com/UTEC-BDII/Proyecto-2.git
 ```
-Entrar a la carpeta src dentro del repositorio:
+Entrar a la carpeta code dentro del repositorio:
 ```
-cd <directorio del repositorio>/code/src/
+cd <directorio del repositorio>/code/
 ```
-Ejecutar el comando de compilación sobre el archivo main.cpp:
+Correr el comando de ejecución de Python sobre el archivo main.py:
 ```
-g++ main.cpp
+python main.py
 ```
-Correr el ejecutable generado (por defecto a.exe):
-```
-.\<nombre del ejecutable>
-```
+
 ## Informe
 Leer la sección de Wiki.
