@@ -88,8 +88,8 @@ def getNorm(vector):
     v = np.array(vector)
     return np.linalg.norm(v)
 
-def retrieval(query, k):
-    idx = InvertedIndex("index.txt")
+# Retrieval fucntion, returns the k most similar tweets to the query
+def retrieval(query, k, idx):
     score = {}
     queryTerms = getTerms(query)
     queryTerms, queryW = getTFIDF(queryTerms, idx.index, -1)
@@ -122,7 +122,10 @@ def showResults(results):
 
     print("Results in decreasing order of score:")
     print("-------------------------------------")
+    cont = 0
     for item in results:
+        cont += 1
+        print("Result", cont)
         print("Score:", round(item[1], 3))
         tweet = data[item[0]]
         print("ID:", tweet['id'])
@@ -138,12 +141,13 @@ def showResults(results):
 # Inverted index class
 class InvertedIndex:
     filename = ""
+    normsfile = ""
     index = {}
     norms = {}
 
-    def __init__(self, filename):
+    def __init__(self, filename, normsfile):
         self.filename = filename
-        self.createIndex()
+        self.normsfile = normsfile
 
     def createIndex(self):
         tweets = readData()
@@ -177,5 +181,60 @@ class InvertedIndex:
             norm = getNorm(getTFIDF(termList, self.index, tweet))
             self.norms[tweet] = norm
 
-    def save():
-        return
+    def load(self):
+        try:
+            with open(self.filename, 'r', encoding='utf-8') as f:
+                for line in f:
+                    line = line[:-1]
+                    term = line.split(':')[0]
+                    if len(term) > 0:
+                        dictstr = line.replace(term + ':', '')
+                    else:
+                        dictstr = line[1:]
+                    while dictstr[0] != '{':
+                        term += ':' + dictstr.split(':')[0]
+                        dictstr = line.replace(term + ':', '')
+                        
+                    dict = json.loads(dictstr)
+                    self.index[term] = dict
+            return self.loadNorms()
+        except:
+            print("Error while opening file", self.filename)
+            return False
+
+    def loadNorms(self):
+        try:
+            with open(self.normsfile, 'r', encoding='utf-8') as f:
+                for line in f:
+                    newline = line[:-1].split(':')
+                    self.norms[int(newline[0])] = float(newline[1])
+            return True
+        except:
+            print("Error while opening file", self.normsfile)
+            return False
+            
+    def save(self):
+        try:
+            f = open(self.filename, 'w', encoding='utf-8')
+        except:
+            print("Error while opening file", self.filename)
+            return False
+
+        for token in self.index:
+            f.write(token + ':')
+            f.write(json.dumps(self.index[token]))
+            f.write('\n')
+        f.close()
+        return self.saveNorms()
+
+    def saveNorms(self):
+        try:
+            f = open(self.normsfile, 'w', encoding='utf-8')
+        except:
+            print("Error while opening file", self.filename)
+            return False
+
+        for norm in self.norms:
+            f.write(str(norm) + ':' + str(self.norms[norm]) + '\n')
+        f.close()
+        return True

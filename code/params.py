@@ -38,14 +38,14 @@ tracklist = {
 """
 
 tracklist = {
-    'Lapadula':['Gianluca Lapadula', '@G_Lapadula'],
-    'Gareca':['Ricardo Gareca', 'Gareca'],
-    'Gallese':['Pedro Gallese', '@pedrogallese'],
-    'Guerrero':['Paolo Guerrero', '@PaoloGuerreroOf'],
-    'Cueva':['Christian Cueva', '@Cuevachris10'],
-    'Tapia':['Renato Tapia','@renatotapiac'],
-    'Trauco':['Miguel Trauco', '@mtrauco17'],
-    'Ramos':['Christian Ramos', '@RamosGaragay'],
-    'Corzo':['Aldo Corzo', '@Alditocorzo'],
-    'Test':['Combina', '#NoDejemosMorirElCine', '#IgnoranteDePorqueria']
+    'Lapadula':['Gianluca Lapadula', 'Lapadula', 'lapadula', '@G_Lapadula'],
+    'Gareca':['Ricardo Gareca', 'Gareca', 'gareca'],
+    'Gallese':['Pedro Gallese', 'Gallese', 'gallese', '@pedrogallese'],
+    'Guerrero':['Paolo Guerrero', 'Guerrero', 'guerrero', '@PaoloGuerreroOf'],
+    'Cueva':['Christian Cueva', 'Cueva', 'cueva', '@Cuevachris10'],
+    'Tapia':['Renato Tapia', 'Tapia', 'tapia', '@renatotapiac'],
+    'Trauco':['Miguel Trauco', 'Trauco', 'trauco', '@mtrauco17'],
+    'Ramos':['Christian Ramos', 'Ramos', 'ramos', '@RamosGaragay'],
+    'Corzo':['Aldo Corzo', 'Corzo', 'corzo', '@Alditocorzo'],
+    'Copa America':['Copa América', 'copa america', 'copa america 2021', 'Copa America 2021', '#CopaAmérica']
 }
