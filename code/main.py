@@ -7,10 +7,10 @@ import time
 from os import listdir, remove
 from os.path import isfile, join
 
-# You must be on code/ folder to run the program
+# You must be on code folder to run the program
 
 if __name__ == '__main__':
-    """remove(params.clean_path + params.tweetFilename) 
+    remove(params.clean_path + params.tweetFilename) 
     remove(params.folder_path + params.tweetFilename) 
 
     print("Enter time limit (seconds) for tweet search:")
@@ -37,8 +37,10 @@ if __name__ == '__main__':
         file_in = join(path_in, f)    
         file_out = join(path_out, f)   
         if isfile(file_in):
-            cleaner.parse_file(file_in, file_out)"""
+            cleaner.parse_file(file_in, file_out)
 
-    # Inverted index
-    idx = index.InvertedIndex("index.txt")
-    #print(idx.index)
+    # Inverted index and query
+    print("Enter query text:")
+    query = input()
+    results = index.retrieval(query, 3)
+    index.showResults(results)
