@@ -7,8 +7,6 @@ import params
 
 # Dictionary that contains tweets data for management on RAM
 data = {}
-with open(params.clean_path + params.tweetFilename, "r", encoding='utf-8') as read_file:
-    data = json.load(read_file)
 
 # Read list of stopwords
 with open("stoplist.txt", 'r', encoding='utf-8') as file:
@@ -42,6 +40,9 @@ def getTerms(text):
 
 # Read data from all files on clean folder
 def readData():
+    global data
+    with open(params.clean_path + params.tweetFilename, "r", encoding='utf-8') as read_file:
+        data = json.load(read_file)
     tweets = {}
     cont = 0
     for elem in data:
@@ -114,6 +115,10 @@ def retrieval(query, k, idx):
 
 # Show resulting tweets and its corresponding information
 def showResults(results):
+    global data
+    with open(params.clean_path + params.tweetFilename, "r", encoding='utf-8') as read_file:
+        data = json.load(read_file)
+        
     print()
     if len(results) == 0:
         print("No results found for query")

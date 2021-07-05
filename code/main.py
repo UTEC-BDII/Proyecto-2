@@ -12,7 +12,6 @@ from os.path import isfile, join
 def query(idx):
     exit = 1
     while exit != 0:
-        print()
         print("Enter query text:")
         q = input()
         print("Enter max number of results:")
@@ -68,6 +67,7 @@ if __name__ == '__main__':
         # Inverted index and queries
         idx = index.InvertedIndex("index.txt", "norms.txt")
         idx.createIndex()
+        print()
         query(idx)
 
     elif (op == 2):
