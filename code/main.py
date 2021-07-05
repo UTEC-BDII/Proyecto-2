@@ -12,6 +12,7 @@ from os.path import isfile, join
 def query(idx):
     exit = 1
     while exit != 0:
+        print()
         print("Enter query text:")
         q = input()
         print("Enter max number of results:")
@@ -33,6 +34,10 @@ if __name__ == '__main__':
     if (op == 1):
         remove(params.clean_path + params.tweetFilename) 
         remove(params.folder_path + params.tweetFilename) 
+        file = open(params.clean_path + params.tweetFilename, "w") 
+        file.close() 
+        file = open(params.folder_path + params.tweetFilename, "w") 
+        file.close() 
 
         print("Enter time limit (seconds) for tweet search:")
         time_limit = input()

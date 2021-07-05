@@ -3,7 +3,6 @@ from nltk import word_tokenize
 from nltk.stem.snowball import SnowballStemmer
 import json
 
-from numpy.linalg.linalg import norm
 import params
 
 # Dictionary that contains tweets data for management on RAM
@@ -84,7 +83,7 @@ def getTFIDF(termsList, idx, docID):
         return termsUniq, vector
 
 # Get norm of vector
-def getNorm(vector):
+def computeNorm(vector):
     v = np.array(vector)
     return np.linalg.norm(v)
 
@@ -105,7 +104,7 @@ def retrieval(query, k, idx):
                 score[par[0]] = 0
             score[par[0]] += (idf * par[1]) * queryW[i]
     normas = idx.norms
-    normQuery = getNorm(queryW)
+    normQuery = computeNorm(queryW)
     for docId in score:
         score[docId] = score[docId] / (normas[docId] * normQuery)
     
@@ -177,7 +176,7 @@ class InvertedIndex:
     def getNorms(self, tweets):
         for tweet in tweets:
             termList = tweets[tweet]
-            norm = getNorm(getTFIDF(termList, self.index, tweet))
+            norm = computeNorm(getTFIDF(termList, self.index, tweet))
             self.norms[tweet] = norm
 
     def load(self):
